@@ -10,22 +10,20 @@
 
     <body>
         <div id="app">
-            <h1>{{title}}</h1>
+            <h1>x:{{obj.x}}</h1>
+            <h2>y:{{obj.y}}</h2>
+            <h1>{{arr}}</h1>
         </div>
 
         <script>
-            /*
-                data
-                    在当前模板中可以直接使用(不需要加this)
-                    data中的数据命名不要使用 $,_ 开头
-                        因为 Vue 解析 data 以后，会把当前 data 中的数据挂载到 实例对象上
-                        app.title
-            */
             let app = new Vue({
                 el: '#app',
                 // 数据
                 data: {
-                    title: 'KKB'
+                    obj: {
+                        x: 1
+                    },
+                    arr: [1, 2, 3]
                 }
             });
         </script>

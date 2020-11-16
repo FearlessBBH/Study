@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="../js/vue.js"></script>
+        <style>
+            [v-cloak] {
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="app">
+            <h1>HEllo，{{title}}</h1>
+            <h1 v-text='"HELLO,"+title'></h1>
+            <h1 v-cloak>{{title}}</h1>
+            <!-- <p v-html='content'></p> -->
+            <p v-pre>vue的解析是{{}},比如{{title}}</p>
+        </div>
+
+        <script>
+            /*
+                指令=后面的内容是表达式，而不是普通的字符串
+            */
+            let app = new Vue({
+                // el: '#app',
+                data: {
+                    myId: 'EXO',
+                    title: 'BBH',
+                    content: '<style>body{display:none}</style>'
+                }
+            });
+
+            setTimeout(() => {
+                app.$mount('#app');
+            }, 1000);
+        </script>
+    </body>
+
+</html>

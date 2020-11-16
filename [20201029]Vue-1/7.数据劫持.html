@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div id="app"></div>
+        <script>
+            {
+                var obj = { x: 1 };
+                let app = document.querySelector("#app");
+
+                // render();
+
+                // obj.x = 100;
+                // render();
+
+
+
+                function render() {
+                    console.log('开始渲染');
+                    app.innerHTML = obj.x + ' / ' + obj.y;
+                }
+
+                // Vue
+                render();
+                var $data = { x: 1 };
+                Object.defineProperty(obj, 'x', {
+                    set(newVal) {
+                        $data.x = newVal;
+                        render();
+                    },
+                    get() {
+                        return $data.x;
+                    }
+                });
+                // Object.defineProperty(obj, 'y', {
+                //     set(newVal) {
+                //         $data.y = newVal;
+                //         render();
+                //     },
+                //     get() {
+                //         return $data.y;
+                //     }
+                // });
+
+                // function $set(o, property, val) {
+                //     Object.defineProperty(o, property, {
+                //         set(newVal) {
+                //             $data.x = val;
+                //             render();
+                //         },
+                //         get() {
+                //             return $data.x;
+                //         }
+                //     });
+                // }
+
+                // proxy
+
+                // react
+                // setState({ x: 2 });
+                // function setState(state) {
+                //     obj = Object.assign(obj, state);
+                //     render();
+                // }
+            }
+        </script>
+    </body>
+
+</html>

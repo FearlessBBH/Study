@@ -6,28 +6,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <script src="../js/vue.js"></script>
+        <style>
+
+        </style>
     </head>
 
     <body>
         <div id="app">
-            <h1>{{title}}</h1>
+            <ul>
+                <!-- of 和 in 没有区别 -->
+                <li v-for='user of user'>
+                    #{{user.id}}--{{user.name}}
+                </li>
+            </ul>
         </div>
 
         <script>
             /*
-                data
-                    在当前模板中可以直接使用(不需要加this)
-                    data中的数据命名不要使用 $,_ 开头
-                        因为 Vue 解析 data 以后，会把当前 data 中的数据挂载到 实例对象上
-                        app.title
+               
             */
             let app = new Vue({
                 el: '#app',
-                // 数据
                 data: {
-                    title: 'KKB'
+                    user: [
+                        { id: 1, name: 'BBH' },
+                        { id: 2, name: 'PCY' },
+                        { id: 3, name: 'SEHUN' }
+                    ]
                 }
             });
+
         </script>
     </body>
 
