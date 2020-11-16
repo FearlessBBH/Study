@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <h1>BBH</h1>
+        </div>
+
+        <script>
+            /*
+                模板生成后的内容会替换挂载点指定的元素
+                每个独立的模板有且只能有一个顶级的根节点
+
+                如果指定了el，且没有template，那么el的outHTML将作为template
+                如果有template，则优先选择template中的内容
+
+                vue渲染的过程
+                    template => VDOM(虚拟dom) => HTML
+            */
+            // 没有template
+            new Vue({
+                el: '#app'
+            });
+
+        </script>
+    </body>
+
+</html>

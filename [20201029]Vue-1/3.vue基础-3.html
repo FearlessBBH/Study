@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+
+        </div>
+
+        <script>
+            /*
+                createElement
+                    把vdom对象解析成html的一个函数
+
+                虚拟dom
+                    {
+                        tag:'div',
+                        attrs:{id:'#app'},
+                        children:[
+                            {
+                                tag:'h1',
+                                children:'BBH'
+                            }
+                        ]
+                    }
+            */
+            new Vue({
+                el: '#app',
+                render(createElement) {
+                    // return createElement('h1', 'BBH');
+                    return createElement('div', { attrs: { id: 'app' } }, [
+                        createElement('h1', 'BBH') // 子节点
+                    ]);
+                }
+            });
+
+            // vdom => html
+            function createElement(tag, attrs, children) {
+
+            }
+
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+
+        </div>
+
+        <script>
+            /*
+                延迟挂载
+            */
+            let app = new Vue({
+                template: `
+                <div id="app">
+                    <h1>BBH</h1>
+                </div>  
+                `
+            });
+            // el: 挂载点不能是body和html
+            // 当实例被挂载以后，实例对象上就会有个 $el 的属性，这个属性就是挂载点元素
+            // vue实例上的内置属性都是以 _ 或者 $ 开始的
+            app.$mount('#app');
+        </script>
+    </body>
+
+</html>

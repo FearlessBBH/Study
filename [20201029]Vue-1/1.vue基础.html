@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app"></div>
+
+
+        <script>
+            /*
+                模板引擎
+                    得到一批数据（用户产生，后端提供的。。）
+
+                el:挂载点
+                template：模板（最终形成的UI原始结构）
+                date：数据
+
+                vue帮助我们做的事情：把data与template进行结合，如何渲染得到最终结构，最终把这个内容接收添加到挂载点的位置上
+            */
+            new Vue({
+                el: '#app',
+                template: `
+                    <h1>{{title}}</h1>
+                `,
+                data: {
+                    title: 'BBH'
+                }
+            });
+        </script>
+    </body>
+
+</html>
