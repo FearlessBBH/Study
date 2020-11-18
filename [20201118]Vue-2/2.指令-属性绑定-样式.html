@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div :style="'width:'+style.width"></div>
+        <div :style='style'></div>
+        <div :style='{width}'></div>
+
+        <div :class='["box1","box2"]'></div>
+        <div :class="{'box1':isActive,'box2':isCheck}"></div>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        // class： 对象写法
+        //  key就是要添加的class，对应的value，如果真添加，否则不添加
+        // 
+        // 
+        let app = new Vue({
+            el: '#app',
+            data: {
+                style: {
+                    width: '100px',
+                    height: '100px',
+                    background: 'red'
+                },
+                width: '100px',
+                isActive: true,
+                isCheck: false
+            }
+        });
+    </script>
+</body>
+
+</html>

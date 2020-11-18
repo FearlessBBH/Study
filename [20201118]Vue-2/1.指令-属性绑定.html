@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-bind:id='myId'></div>
+        <div v-bind:id='myId+"-1"'></div>
+        <div :id='myId'></div>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        //  指令 = 后面的内容 
+        // v-指令名称:参数 = '指令的值'
+        // 简写：
+        //  ：=》v-bind:
+        let app = new Vue({
+            el: '#app',
+            data: {
+                myId: 'BBH'
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model.lazy='val1'>
+        <span v-if='val1.length > 5'> 名字太长了 </span>
+        <hr>
+        <input type="text" v-model.number='v1'>+<input type="text" v-model.number='v2'>={{v1+v2}}
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        // 指令名称：参数.修饰符=值
+        // 
+        // 不同的指令有不同的参数，也有不同的修饰符可用，具体看当前官网或自定义指令的具体实现
+        // 
+        let app = new Vue({
+            el: '#app',
+            data: {
+                val1: 1,
+                v1: 1,
+                v2: 1
+            }
+        });
+    </script>
+</body>
+
+</html>

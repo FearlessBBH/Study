@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" :value='val1'>
+        <input type="text" v-model='val2'>
+
+        <textarea :value='val3'></textarea>
+        <textarea>{{val3}}</textarea>
+
+        <textarea v-model='val4'>{{val4}}</textarea>
+
+        <input type="checkbox" v-model='v5' value="足球">足球
+        <input type="checkbox" v-model='v5' value="篮球">篮球
+
+        <hr>
+        <input type="radio" v-model='v6' value="男">男
+        <input type="radio" v-model='v6' value="女">女
+        <hr>
+        <input type="checkbox" v-model='v7'>是否
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        //  v-bind : 单项数据绑定，数据到视图
+        //  v-model ：双向数据绑定，数据到视图，视图到数据
+        //      - 不是所有标签（组件）都支持 v-model
+        //          - 默认： 交互元素（input，textarea，select）
+        //      - 不是所有属性都支持 v-model
+        //          - v-model 只能绑定1个指定好的属性
+        //          - input：value
+        //          - textarea： value
+        //          - select：selected
+
+        // property : 属性
+        // attribute ：属性
+        let app = new Vue({
+            el: '#app',
+            data: {
+                val1: 1,
+                val2: 1,
+                val3: 1,
+                val4: 1,
+                v5: [],
+                v6: '',
+                v7: false
+            }
+        });
+    </script>
+</body>
+
+</html>
