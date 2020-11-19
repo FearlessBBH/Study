@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for='item in users' :key='item.id' @click='fn(item.id,$event)'>{{item.name}}</li>
+        </ul>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        /**
+         * 事件
+         *    指令: v-on / 简写：@
+         *          v-on:事件名称.修饰符 = '执行的函数或者表达式'
+         * 
+         * this
+         *      vue 中的methods中的函数中的this永远指向当前vue实例
+         * 事件对象
+         *      事件绑定的函数，默认的第一个参数就是事件对象
+         * 模板中的 $event 是规定死的
+         * */
+        let app = new Vue({
+            el: '#app',
+            data: {
+                users: [{
+                    id: 1,
+                    name: 'BBH'
+                }, {
+                    id: 2,
+                    name: 'PCY'
+                }, {
+                    id: 3,
+                    name: 'SEHUN'
+                }]
+            },
+            methods: {
+                fn(id, e) {
+                    console.log(id, e)
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

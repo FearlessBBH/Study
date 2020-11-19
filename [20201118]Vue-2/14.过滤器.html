@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in goods" :keys='item.id'>
+                <span>名称：{{item.name}}</span>
+                <span>价格：{{item.price|rmb('$')}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        /**
+         * 对内容（数据）进行过滤（二次操作）对一种方式
+         * 
+         * fn4(fn3(fn2(fn1('BBH')),1))
+         * 'BBH'|fn1|fn2|fn3(1)|fn4
+         * 
+         * */
+        Vue.filter('rmb', function(price, flag = '￥') {
+            return `${flag}` + (price / 100).toFixed(2);
+        })
+        let app = new Vue({
+            el: '#app',
+            data: {
+                goods: [{
+                        id: 1,
+                        name: 'iphone',
+                        price: 9999
+                    }, {
+                        id: 1,
+                        name: 'ipad',
+                        price: 5551
+                    }, {
+                        id: 1,
+                        name: 'iMac',
+                        price: 19999
+                    },
+
+                ]
+            }
+        });
+    </script>
+</body>
+
+</html>

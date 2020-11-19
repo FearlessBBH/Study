@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <div style="padding:100px; background:red" @click='fn1'>
+            <button @click.stop='fn2'>PUSH</button>
+        </div>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        /**
+         * 事件
+         * 
+         * */
+        let app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+                fn1() {
+                    console.log(1)
+                },
+                fn2(e) {
+                    console.log(2)
+                        // e.stopPropagation();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

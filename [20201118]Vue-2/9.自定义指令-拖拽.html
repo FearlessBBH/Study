@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* dic {
+            cursor: pointer;
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div :style='style' v-drag='isDrag'></div>
+        <div :style='style2' v-drag.limit='isDrag'></div>
+        <button @click='isDrag=!isDrag'>START Drag {{isDrag}}</button>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.directive('drag', {
+            bind(el, {
+                value,
+                modifiers
+            }) {
+                // console.log(binding);
+                console.log(value);
+                el._value = value;
+                el._isDrag = false;
+                el.addEventListener('mousedown', function(e) {
+
+                    if (!el._value) return;
+
+                    el._isDrag = true;
+                    el._x = e.clientX - el.offsetLeft;
+                    el._y = e.clientY - el.offsetTop;
+
+                    e.preventDefault();
+                });
+                document.addEventListener('mousemove', function(e) {
+                    if (el._isDrag) {
+                        let l = e.clientX - el._x;
+                        let t = e.clientY - el._y;
+
+                        // 限制范围
+                        if (modifiers.limit) {
+                            if (l < 0) l = 0;
+                            if (t < 0) t = 0;
+                        }
+
+                        el.style.left = l + 'px';
+                        el.style.top = t + 'px';
+                    }
+                });
+                document.addEventListener('mouseup', function(e) {
+                    el._isDrag = false;
+                });
+            },
+            componentUpdated(el, {
+                value
+            }) {
+                console.log('Start', value);
+                el._value = value;
+            }
+        });
+        let app = new Vue({
+            el: '#app',
+            data: {
+                style: {
+                    position: 'absolute',
+                    top: '40px',
+                    left: '10px',
+                    width: '100px',
+                    height: '100px',
+                    backgroundColor: 'red',
+                    cursor: 'pointer'
+                },
+                style2: {
+                    position: 'absolute',
+                    top: '40px',
+                    left: '400px',
+                    width: '100px',
+                    height: '100px',
+                    backgroundColor: 'blue',
+                    cursor: 'pointer'
+                },
+                isDrag: false
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* dic {
+            cursor: pointer;
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div :style='style' v-drag='isDrag'></div>
+        <button @click='isDrag=!isDrag'>START Drag {{isDrag}}</button>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.directive('drag', {
+            bind(el, {
+                value
+            }) {
+                // console.log(binding);
+                console.log(value);
+                el._value = value;
+                el._isDrag = false;
+                el.addEventListener('mousedown', function(e) {
+
+                    if (!el._value) return;
+
+                    el._isDrag = true;
+                    el._x = e.clientX - el.offsetLeft;
+                    el._y = e.clientY - el.offsetTop;
+
+                    e.preventDefault();
+                });
+                document.addEventListener('mousemove', function(e) {
+                    if (el._isDrag) {
+                        let l = e.clientX - el._x;
+                        let t = e.clientY - el._y;
+
+                        el.style.left = l + 'px';
+                        el.style.top = t + 'px';
+                    }
+                });
+                document.addEventListener('mouseup', function(e) {
+                    el._isDrag = false;
+                });
+            },
+            componentUpdated(el, {
+                value
+            }) {
+                console.log('Start', value);
+                el._value = value;
+            }
+        });
+        let app = new Vue({
+            el: '#app',
+            data: {
+                style: {
+                    position: 'absolute',
+                    top: '40px',
+                    left: '10px',
+                    width: '100px',
+                    height: '100px',
+                    backgroundColor: 'red',
+                    cursor: 'pointer'
+                },
+                isDrag: false
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

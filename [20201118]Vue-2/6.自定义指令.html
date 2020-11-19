@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-focus/> <button @click='fn'>Push</button>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        // 
+        //
+        // 
+        // 
+
+        // Vue.directive('指令名称',{指令配置});
+        Vue.directive('focus', {
+            bind(el, binding) {
+                // console.log('bind', el, binding)
+
+            },
+            inserted(el) {
+                console.log('inserted')
+                el.focus();
+            }
+        });
+        let app = new Vue({
+            el: '#app',
+            data: {
+                isFocus: false
+            },
+            methods: {
+                fn() {
+                    console.log('...')
+                }
+            }
+        });
+        let div = document.createElement('div');
+        console.dir(div);
+    </script>
+</body>
+
+</html>
