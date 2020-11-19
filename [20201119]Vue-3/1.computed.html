@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            background-color: yellow;
+            /* border: none; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <button class="active" @click='getUser("")'>全部</button>
+            <button @click='getUser("男")'>男</button>
+            <button @click='getUser("女")'>女</button>
+        </div>
+        <hr>
+        <ul>
+            <li v-for='item in showUsers' :key='item.id'>
+                <span>{{item.name}}</span>
+                <span>{{item.gender}}</span>
+            </li>
+        </ul>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                users: [{
+                    id: 1,
+                    name: 'BBH',
+                    gender: '男'
+                }, {
+                    id: 2,
+                    name: 'PCY',
+                    gender: '男'
+                }, {
+                    id: 3,
+                    name: 'SEHUN',
+                    gender: '男'
+                }, {
+                    id: 4,
+                    name: 'KAI',
+                    gender: '男'
+                }, {
+                    id: 5,
+                    name: 'DO',
+                    gender: '女'
+                }, {
+                    id: 6,
+                    name: 'SOHO',
+                    gender: '女'
+                }, {
+                    id: 7,
+                    name: 'LAY',
+                    gender: '男'
+                }, {
+                    id: 8,
+                    name: 'XIUMIN',
+                    gender: '女'
+                }, ],
+                showUsers: []
+            },
+            methods: {
+                getUser(gender) {
+                    if (gender == '') {
+                        this.showUsers = this.users
+                    } else {
+                        this.showUsers = this.users.filter(user => user.gender === gender)
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
