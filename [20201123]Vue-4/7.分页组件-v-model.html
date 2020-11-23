@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .page a {
+                padding: 5px 8px;
+                border: 1px solid #ff8200;
+                text-decoration: none;
+                margin: 5px;
+            }
+
+            .page a.active {
+                background-color: #ff8200;
+                color: #fff;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- 
+            父组件
+            子组件
+                <div>
+                    <span></span>
+                </div>
+         -->
+        <div id="app">
+            <ul>
+                <li v-for='items in showUsers' :key='items.id'>{{items.name}}</li>
+            </ul>
+            <!-- 如果属性没有使用v-bind，那么传入的值就只有字符串 -->
+            <k-pagination :pages='uPages' :page='uPage' @changepage='changePage'></k-pagination>
+        </div>
+        <script src="../js/vue.js"></script>
+        <script>
+            /**
+             * 组件通信
+             *  父 -> 子
+             *      父级通过调用子元素，通过子元素的属性方式传入数据
+             *      子集内部通过 props 配置项 来接受对应的数据        
+             * 
+             *  子 -> 父
+             *      注意：vue中的数据是默认单向的流动，只能父到子直接传递，但是子到父不能直接修改
+             *      原因：因为父级的数据不一定只是某个子集使用，也许还有其他的子集也在使用这个数据
+             *      那么如果一个子集内部随意去修改了父级的数据，那么很容易会出现数据错乱
+             * 
+             *      如果子集想修改数据，需要子集通知父级，父级接收到这个通知以后，去决定是否修改
+             *      通知的方式：（自定义）事件机制
+             * */
+            Vue.component('k-pagination', {
+                props: ['pages', 'page'],
+                template: `<div class="page">
+                               <a href="">上一页</a>
+                               <a
+                                    href="" 
+                                    v-for='p in pages' 
+                                    :class='{"active":p === page}'
+                                    @click.prevent='gotoPage(p)'
+                                >{{p}}</a>
+                               <a href="">下一页</a>
+                           </div>`,
+                methods: {
+                    gotoPage(p) {
+                        // console.log(p);
+                        this.$emit('changepage', p);
+                    }
+                }
+            });
+
+            let app = new Vue({
+                el: '#app',
+                data: {
+                    users: [
+                        { id: 1, name: 'BBH', gender: '男' },
+                        { id: 2, name: 'PCY', gender: '男' },
+                        { id: 3, name: 'SEHUN', gender: '男' },
+                        { id: 4, name: 'KAI', gender: '男' },
+                        { id: 5, name: 'DO', gender: '女' },
+                        { id: 6, name: 'SOHO', gender: '女' },
+                        { id: 7, name: 'LAY', gender: '男' },
+                        { id: 8, name: 'XIUMIN', gender: '女' }
+                    ],
+                    uPage: 1, // 当前页和已有数据没有太多关联，只会和用户的行为关联，所以他不算派生的
+                    prepage: 2, // 每页显示多少条
+                    // uPages: 10 // 总的页数是根据已有的数据总条数，以及你每页想显示的数据条数来决定的，所以这个是派生的
+                },
+                computed: {
+                    uPages() {
+                        return Math.ceil(this.users.length / this.prepage);
+                    },
+                    showUsers() {
+                        let start = (this.uPage - 1) * this.prepage;
+                        return this.users.slice(start, start + this.prepage);
+                    }
+                },
+                methods: {
+                    changePage(page) {
+                        // console.log('子集修改了page', page);
+                        this.uPage = page;
+                    }
+                }
+            })
+        </script>
+    </body>
+
+</html>

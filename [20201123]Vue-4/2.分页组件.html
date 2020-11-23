@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .page a {
+                padding: 5px 8px;
+                border: 1px solid #ff8200;
+                text-decoration: none;
+                margin: 5px;
+            }
+
+            .page a.active {
+                background-color: #ff8200;
+                color: #fff;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="app">
+            <ul>
+                <li v-for='items in users' :key='items.id'>{{items.name}}</li>
+            </ul>
+            <div class="page">
+                <a href="">上一页</a>
+                <a href="">1</a>
+                <a href="">2</a>
+                <a href="" class="active">3</a>
+                <a href="">4</a>
+                <a href="">5</a>
+                <a href="">6</a>
+                <a href="">下一页</a>
+            </div>
+        </div>
+        <script src="../js/vue.js"></script>
+        <script>
+            let app = new Vue({
+                el: '#app',
+                data: {
+                    users: [
+                        { id: 1, name: 'BBH', gender: '男' },
+                        { id: 2, name: 'PCY', gender: '男' },
+                        { id: 3, name: 'SEHUN', gender: '男' },
+                        { id: 4, name: 'KAI', gender: '男' },
+                        { id: 5, name: 'DO', gender: '女' },
+                        { id: 6, name: 'SOHO', gender: '女' },
+                        { id: 7, name: 'LAY', gender: '男' },
+                        { id: 8, name: 'XIUMIN', gender: '女' }
+                    ]
+                }
+            })
+        </script>
+    </body>
+
+</html>
