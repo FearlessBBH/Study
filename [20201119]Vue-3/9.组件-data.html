@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <k-div></k-div>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        // Vue
+        /**
+           
+        */
+        Vue.component('k-div', {
+            data() {
+                return {
+                    title: 'BBH'
+                }
+            },
+            template: `
+            <div>
+                <h1>{{title}}</h1>
+            </div>
+            `
+        })
+
+        let app = new Vue({
+            el: '#app'
+
+        });
+    </script>
+</body>
+
+</html>

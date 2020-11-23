@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <k-div></k-div>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        // Vue
+        /**
+            Vue 
+                根组件（应用的最顶层的组件，一般情况下一个应用只有一个顶层组件）
+                可复用组件
+                    在应用中更具有复用特性的组件（轮播图，幻灯片，选项卡，弹窗）
+            
+        */
+        Vue.component('k-div', {
+            template: `
+            <div>
+                <h1>BBH</h1>
+                <h1>BBH</h1>
+            </div>
+            `
+        })
+
+        let app = new Vue({
+            el: '#app'
+
+        })
+    </script>
+</body>
+
+</html>

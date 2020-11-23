@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <k-div></k-div>
+        <k-p>
+
+        </k-p>
+
+    </div>
+    <hr>
+    <div id="app2">
+        <k-div></k-div>
+        <!-- <k-p></k-p> -->
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        // Vue
+        /**
+            通过 Vue.component 注册的组件的：全局组件
+            
+            通过组件选项：components 注册的组件：局部组件
+        */
+        Vue.component('k-div', {
+            template: `
+            <div>
+                <h1>BBH</h1>
+                <h1>BBH</h1>
+            </div>
+            `
+        })
+
+        let app = new Vue({
+            el: '#app',
+            components: {
+                'k-p': {
+                    template: `<p>这是k-p <k-p-p></k-p-p></p>`,
+                    components: {
+                        'k-p-p': {
+                            template: `<p>这是k-p-p</p>`
+                        }
+                    }
+                }
+            }
+
+        });
+        let app2 = new Vue({
+            el: '#app2'
+
+        })
+    </script>
+</body>
+
+</html>

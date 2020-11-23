@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            background-color: yellow;
+            /* border: none; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <button :class="{active:gender===''}" @click='gender=""'>全部</button>
+            <button :class="{active:gender==='男'}" @click='gender="男"'>男</button>
+            <button :class="{active:gender==='女'}" @click='gender="女"'>女</button>
+        </div>
+        <hr>
+        <ul>
+            <li v-for='item in showUsers' :key='item.id'>
+                <input type="checkbox" v-model='item.checked'>
+                <span>{{item.name}}</span>
+                <span>{{item.gender}}</span>
+            </li>
+        </ul>
+        <hr>
+        <input type="checkbox" v-model='checkedAll'> 全选
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        let users = [{
+            id: 1,
+            name: 'BBH',
+            gender: '男',
+            checked: false
+        }, {
+            id: 2,
+            name: 'PCY',
+            gender: '男',
+            checked: false
+        }, {
+            id: 3,
+            name: 'SEHUN',
+            gender: '男',
+            checked: true
+        }, {
+            id: 4,
+            name: 'KAI',
+            gender: '男',
+            checked: false
+        }, {
+            id: 5,
+            name: 'DO',
+            gender: '女',
+            checked: false
+        }, {
+            id: 6,
+            name: 'SOHO',
+            gender: '女',
+            checked: false
+        }, {
+            id: 7,
+            name: 'LAY',
+            gender: '男',
+            checked: false
+        }, {
+            id: 8,
+            name: 'XIUMIN',
+            gender: '女',
+            checked: false
+        }];
+        let app = new Vue({
+            el: '#app',
+            data: {
+                users,
+                gender: '',
+                // checked 属性的值其实是由users中每一个数据的checked的值来决定的
+                // checkedAll: false
+            },
+            /**
+                计算得到的数据
+                    - computed里面存放的是属性，类似 data ， 而不是 methods， 所以称为计算属性
+                    - 里面的属性可以像 data 里面存放的数据一样去使用
+                    - 这些属性的值是通过运算得到的
+                    - 它的结构类似（defineProperty），getter，setter
+                    - 计算属性的值同时还会根据它所依赖的数据的变化而自动变化
+            */
+            computed: {
+                showUsers: {
+                    // get 方法定义该属性是如何得到值的
+                    get() {
+                        if (this.gender === '') {
+                            return this.users;
+                        } else {
+                            return this.users.filter(user => user.gender === this.gender);
+                        }
+                    }
+                },
+                checkedAll: {
+                    get() {
+                        return this.users.every(user => user.checked)
+                    },
+                    set(newVal) {
+                        this.users = this.users.map(user => {
+                            return {...user,
+                                ... {
+                                    checked: newVal
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

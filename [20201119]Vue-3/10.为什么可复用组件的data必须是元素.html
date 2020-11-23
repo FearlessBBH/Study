@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <k-div></k-div>
+    <script>
+        function Vue(options) {
+            this.options = options;
+        }
+
+        function vueComponent(name, options) {
+            return new Vue(options);
+        }
+        // 创建组件
+        let kDiv = vueComponent('kDiv', {
+            data: {
+                a: 1
+            }
+        });
+    </script>
+</body>
+
+</html>

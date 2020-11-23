@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{a}}
+        <button @click='showDate=!showDate'>{{showDate}}</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                showDate: true
+            },
+            computed: {
+                // a: {
+                //     get() {
+                //         if (this.showDate) {
+                //             return 'BBH'
+                //         } else {
+                //             return 'bbh'
+                //         }
+                //     }
+                // }
+                // 如果某个计算属性只需要处理 get 的逻辑，不需要处理 set 的逻辑，那么可以简写如下：
+                // 直接使用函数表示 get
+                a() {
+                    if (this.showDate) {
+                        return 'BBH'
+                    } else {
+                        return 'bbh'
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

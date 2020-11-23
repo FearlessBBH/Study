@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model.lazy='keyWord'>
+        <hr>
+        <ul>
+            <li v-for='item in showUsers'>
+                {{item.name}}
+            </li>
+        </ul>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                keyWord: '',
+                users: [{
+                    id: 1,
+                    name: 'BBH',
+                    gender: '男'
+                }, {
+                    id: 2,
+                    name: 'PCY',
+                    gender: '男'
+                }, {
+                    id: 3,
+                    name: 'SEHUN',
+                    gender: '男'
+                }, {
+                    id: 4,
+                    name: 'KAI',
+                    gender: '男'
+                }, {
+                    id: 5,
+                    name: 'DO',
+                    gender: '女'
+                }, {
+                    id: 6,
+                    name: 'SOHO',
+                    gender: '女'
+                }, {
+                    id: 7,
+                    name: 'LAY',
+                    gender: '男'
+                }, {
+                    id: 8,
+                    name: 'XIUMIN',
+                    gender: '女'
+                }],
+            },
+            computed: {
+                showUsers() {
+                    if (this.keyWord == '') return [];
+                    // 如果数据来源不是data中的，而是通过异步的方式获取到的，比如ajax
+                    // return this.users.filter(user => user.name.includes(this.keyWord))
+
+                    // 这里的 return 的是定时器编号
+                    // return setTimeout(() => {
+                    //     // 这里的return是定时器函数的，不是showUsers的返回值
+                    //     return this.users.filter(user => user.name.includes(this.keyWord));
+                    // }, 1000)
+
+                    // 可惜的是，computed 不支持异步任务/promise
+                    return new Promise(res => {
+                        setTimeout(() => {
+                            res(this.users.filter(user => user.name.includes(this.keyWord)))
+                        }, 1000);
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

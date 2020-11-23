@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            background-color: yellow;
+            /* border: none; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p v-if='showDate'>{{getNow()}}</p>
+        <button @click='showDate=!showDate'>SHOWDATE:{{showDate}}</button>
+        <p v-if='showDate'>{{now}}</p>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                showDate: true
+            },
+            methods: {
+                getNow() {
+                    return Date.now();
+                }
+            },
+            computed: {
+                now: {
+                    get() {
+                        // 此处没有任何其他依赖的数据，这里模拟表示依赖的数据没有变化
+                        return Date.now();
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
