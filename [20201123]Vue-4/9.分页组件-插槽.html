@@ -33,51 +33,44 @@
             <li v-for='items in showUsers' :key='items.id'>{{items.name}}</li>
         </ul>
         <!-- 如果属性没有使用v-bind，那么传入的值就只有字符串 -->
-        <k-pagination :pages='uPages' v-model='uPage'></k-pagination>
+        <k-pagination :pages='uPages' :page.sync='uPage'>
+            <span slot="header">友情赞助</span>
+            <span slot="footer">共{{uPages}}页，当前第{{uPage}}页</span>
+        </k-pagination>
     </div>
     <script src="../js/vue.js"></script>
     <script>
         /**
-         * 组件通信
-         *  父 -> 子
-         *      父级通过调用子元素，通过子元素的属性方式传入数据
-         *      子集内部通过 props 配置项 来接受对应的数据        
-         * 
-         *  子 -> 父
-         *      注意：vue中的数据是默认单向的流动，只能父到子直接传递，但是子到父不能直接修改
-         *      原因：因为父级的数据不一定只是某个子集使用，也许还有其他的子集也在使用这个数据
-         *      那么如果一个子集内部随意去修改了父级的数据，那么很容易会出现数据错乱
-         * 
-         *      如果子集想修改数据，需要子集通知父级，父级接收到这个通知以后，去决定是否修改
-         *      通知的方式：（自定义）事件机制
+         * v-model
+         * 不推荐事件v-model，原因它隐藏了太多细节，在使用这个组件的时候，不太明了，当出现了问题也不容易进行排错
+         * 同时 v-model 也绑定不了多个prop
+         *
+         * 推荐使用 .sync 修饰符
          * */
         Vue.component('k-pagination', {
-            props: ['pages', 'page'],
-            // model 选项就是用来设定 v-model 绑定的规则的
-            model: {
-                // prop 告诉 v-model 绑定的prop是哪个
-                prop: 'page',
-                // event 告诉 v-model 触发什么事件的时候自动去修改v-model的绑定值
-                event: 'changepage'
-            },
+            props: ['pages', 'page', 'info'],
             template: `<div class="page">
-                               <a href="" @click.prevent='prev()'>上一页</a>
-                               <a href="" 
-                                  v-for='p in pages' 
-                                  :class='{"active":p === page}'
-                                  @click.prevent='gotoPage(p)'
-                                >{{p}}</a>
-                               <a href="" @click.prevent='next()'>下一页</a>
-                           </div>`,
+                            <slot name='header'></slot>
+                           <a href="" @click.prevent='prev()'>上一页</a>
+                           <a href="" 
+                              v-for='p in pages' 
+                              :class='{"active":p === page}'
+                              @click.prevent='gotoPage(p)'
+                            >{{p}}</a>
+                           <a href="" @click.prevent='next()'>下一页</a>
+                            <!-- template 是 vue 内置的组件 -->
+                            <!-- <template v-html='info'></template> -->
+                            <slot name='footer'></slot>
+                       </div>`,
             methods: {
                 gotoPage(p) {
-                    this.$emit('changepage', p);
+                    this.$emit('update:page', p);
                 },
                 prev() {
-                    this.$emit('changepage', this.page - 1);
+                    this.$emit('update:page', this.page - 1);
                 },
                 next() {
-                    this.$emit('changepage', this.page + 1);
+                    this.$emit('update:page', this.page + 1);
                 }
             }
         });
