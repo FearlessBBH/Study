@@ -14,11 +14,8 @@
     <post-mail v-if="currentComponent =='PostMail'"></post-mail>
     <recycle-bin v-if="currentComponent =='RecycleBin'"></recycle-bin> -->
     <keep-alive>
-      <transition name="slide-fade">
-        <component :is="currentComponent"></component>
-      </transition>
+      <component :is="currentComponent"></component>
     </keep-alive>
-
   </div>
 </template>
 
@@ -47,17 +44,5 @@ export default {
 <style>
 .current {
   background: #ff8200;
-}
-.slide-fade-enter,
-.slide-fade-leave-to {
-  opacity: 0;
-}
-.slide-fade-enter-to,
-.slide-fade-leave {
-  opacity: 1;
-}
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: all 0.3s;
 }
 </style>
