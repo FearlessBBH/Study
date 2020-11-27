@@ -96,8 +96,16 @@ const router = new VueRouter({
 })
 let isLogin = false
 router.beforeEach((to, from, next) => {
-    if (!isLogin && to.name != 'Login') {
-        next({ name: 'Login' })
+    /**
+     * 1.是否登录
+     * 2.是否是登录页
+     * */
+    if (!isLogin) {
+        if (to.name != 'Login') {
+            next({ name: 'Login' });
+        } else {
+            next();
+        }
     } else {
         next();
     }
