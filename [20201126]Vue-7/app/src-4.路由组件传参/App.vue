@@ -10,9 +10,7 @@
       <router-link :to="{name:'Book'}">小说</router-link>
     </div>
     <hr>
-    <transition name='fade'>
-      <router-view></router-view>
-    </transition>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -42,16 +40,5 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
-
-.fade-enter-active {
-  transition: opacity 0.5s;
-}
-.fade-leave-active {
-  transition: none;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

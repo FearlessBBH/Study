@@ -1,18 +1,16 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link :to="{name:'Home'}" exact>Home</router-link>
+      <router-link :to="{name:'Component1'}" exact>Component1</router-link>
       <span> | </span>
-      <router-link :to="{name:'About'}" exact>About</router-link>
+      <router-link :to="{name:'Component2'}" exact>Component2</router-link>
       <span> | </span>
-      <router-link :to="{name:'UserProfile'}">User</router-link>
+      <router-link :to="{name:'Component3'}" exact>Component3</router-link>
       <span> | </span>
-      <router-link :to="{name:'Book'}">小说</router-link>
+      <router-link :to="{name:'Component4'}" exact>Component4</router-link>
     </div>
     <hr>
-    <transition name='fade'>
-      <router-view></router-view>
-    </transition>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -32,7 +30,9 @@ export default {
 }
 
 #nav {
+  position: fixed;
   padding: 30px;
+  background: #e0e0e0;
 }
 
 #nav a {
@@ -42,16 +42,5 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
-
-.fade-enter-active {
-  transition: opacity 0.5s;
-}
-.fade-leave-active {
-  transition: none;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

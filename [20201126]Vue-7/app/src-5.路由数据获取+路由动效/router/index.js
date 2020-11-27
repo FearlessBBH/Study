@@ -16,8 +16,6 @@ import BookBoy from '@/views/book/Boy'
 import BookGirl from '@/views/book/Girl'
 import BookChoose from '@/views/BookChoose'
 
-import Login from '@/views/Login'
-
 import NotFound from '@/views/NotFound'
 
 
@@ -33,6 +31,19 @@ const router = new VueRouter({
         path: '/item/:itemId(\\d+)',
         name: 'Item',
         component: Item,
+        /**
+         * 当设置成true，自动吧路由中的params中的参数数据映射到对应的组件中
+         * */
+        // props: true
+
+        /**
+         * 如果返回一个对象，则该对象会被融合（合并）到对应组件的props中
+         * */
+        // props: { a: 1, b: 2 }
+
+        /**
+         * 是一个函数，返回值合并到组件的props中
+         * */
         props: (r) => {
             return {
                 itemId: Number(r.params.itemId)
@@ -85,22 +96,10 @@ const router = new VueRouter({
         name: 'BookChoose',
         component: BookChoose
     }, {
-        path: '/login',
-        name: 'Login',
-        component: Login
-    }, {
         path: '*',
         name: 'NotFound',
         component: NotFound
     }]
-})
-let isLogin = false
-router.beforeEach((to, from, next) => {
-    if (!isLogin && to.name != 'Login') {
-        next({ name: 'Login' })
-    } else {
-        next();
-    }
 })
 
 // 假进度条

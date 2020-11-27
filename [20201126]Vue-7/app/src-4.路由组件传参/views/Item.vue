@@ -20,12 +20,11 @@
 
 <script>
 import RMB from '@/filters/RMB'
-import axios from 'axios'
 
 export default {
   name: 'Item',
 
-  props: ['itemId'],
+  props: ['itemId', 'a', 'b'],
 
   data() {
     return {
@@ -39,37 +38,22 @@ export default {
   },
 
   created() {
-    // let itemId = this.itemId;
-    // if (itemId) {
-    //   this.axios({
-    //     url: `/api/item/${ itemId }`
-    //   }).then(res => {
-    //     this.item = res.data
-    //   }).catch(err => {
-    //     this.isError = true
-    //   });
-    // }
+    // console.log('created', this.itemId);
+    // let itemId = Number(this.itemId || this.$route.params.itemId);
 
-  },
-  // 组件渲染之前执行,注意：this
-  async beforeRouteEnter(to, from, next) {
-    // next();
-    // console.log(to);
-    let itemId = to.params.itemId;
+    // console.log(this);
+    // 当路由中的props：true，那么当使用路由访问该组件的时候，路由中的this.$route.params.itemId会自动赋值给组件的props中同名属性
+    let itemId = this.itemId;
     if (itemId) {
-      try {
-        let res = await axios({
-          url: `/api/item/${ itemId }`
-        });
-        // this.item = res.data;
-        next(vm => {
-          // console.log(vm);
-          vm.item = res.data
-        })
-      } catch (e) {
+      this.axios({
+        url: `/api/item/${ itemId }`
+      }).then(res => {
+        this.item = res.data
+      }).catch(err => {
         this.isError = true
-      }
+      });
     }
+
   }
 }
 </script>
